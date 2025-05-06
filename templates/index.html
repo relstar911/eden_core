@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EDEN.CORE - A Contextual, Ethical and Self-Limiting Intelligence</title>
     <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/transparent_formulas.css">
 </head>
 <body>
     <header>
@@ -81,6 +82,62 @@
                         <span class="metric-name">System State</span>
                         <span class="metric-value" id="energy-state-value">Active</span>
                     </div>
+                    
+                    <h3 class="mt-4">Adaptive Energy</h3>
+                    <div class="metric">
+                        <span class="metric-name">Current Profile</span>
+                        <span class="metric-value" id="energy-profile-value">Balanced</span>
+                    </div>
+                    
+                    <div class="metric">
+                        <span class="metric-name">Processing Depth</span>
+                        <span class="metric-value" id="processing-depth-value">5</span>
+                    </div>
+                    
+                    <div class="metric" id="battery-metric" style="display: none;">
+                        <span class="metric-name">Battery Level</span>
+                        <span class="metric-value" id="battery-level-value">100%</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="battery-level-bar" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="mt-4">Perception</h3>
+                    <div class="perception-container">
+                        <div class="perception-controls">
+                            <button id="enable-camera" class="btn btn-secondary">Enable Camera</button>
+                            <button id="enable-audio" class="btn btn-secondary">Enable Audio</button>
+                            <button id="enable-sensors" class="btn btn-secondary">Enable Sensors</button>
+                        </div>
+                        
+                        <div class="perception-preview" id="camera-preview-container" style="display: none;">
+                            <h4>Camera Preview</h4>
+                            <video id="camera-preview" autoplay playsinline></video>
+                            <canvas id="camera-canvas" style="display: none;"></canvas>
+                        </div>
+                        
+                        <div class="perception-data">
+                            <h4>Perception Data</h4>
+                            <div class="metric">
+                                <span class="metric-name">Active Modalities</span>
+                                <span class="metric-value" id="active-modalities-value">None</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-name">Visual Brightness</span>
+                                <span class="metric-value" id="visual-brightness-value">0.00</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="visual-brightness-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-name">Audio Amplitude</span>
+                                <span class="metric-value" id="audio-amplitude-value">0.00</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="audio-amplitude-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -104,5 +161,6 @@
     </footer>
     
     <script src="/static/main.js"></script>
+    <script src="/static/perception.js"></script>
 </body>
 </html>

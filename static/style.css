@@ -72,6 +72,76 @@ h1, h2, h3 {
     overflow: hidden;
 }
 
+.metrics-container {
+    background-color: #1a1a1a;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Energy Profile Styles */
+.profile-eco {
+    color: #27ae60 !important;
+}
+
+.profile-balanced {
+    color: #3498db !important;
+}
+
+.profile-performance {
+    color: #e74c3c !important;
+}
+
+/* Battery Styles */
+#battery-metric .progress-bar {
+    background-color: #2c3e50;
+    height: 8px;
+    margin-top: 5px;
+}
+
+/* Perception Styles */
+.perception-container {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #1a1a1a;
+    border-radius: 5px;
+}
+
+.perception-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.perception-preview {
+    margin-bottom: 15px;
+    border: 1px solid #333;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#camera-preview {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    border-radius: 5px;
+    background-color: #000;
+}
+
+.perception-data {
+    padding: 10px;
+}
+
+.perception-data h4 {
+    margin-bottom: 10px;
+    color: var(--accent-color);
+}
+
+#active-modalities-value {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
 .progress-fill {
     height: 100%;
     background-color: var(--accent-color);

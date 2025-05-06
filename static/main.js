@@ -75,6 +75,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     data.intent_analysis.action_suitability || 0,
                     data.energy_metrics
                 );
+                
+                // Display calculation details if available
+                if (data.calculation_details) {
+                    displayCalculationDetails(data.calculation_details);
+                }
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -130,7 +135,170 @@ document.addEventListener('DOMContentLoaded', function() {
                 energyStateValue.textContent = energyMetrics.is_sleeping ? 'Sleep Mode' : 'Active';
                 energyStateValue.className = energyMetrics.is_sleeping ? 'metric-value sleeping' : 'metric-value';
             }
+            
+            // Update adaptive energy metrics if available
+            const energyProfileValue = document.getElementById('energy-profile-value');
+            const processingDepthValue = document.getElementById('processing-depth-value');
+            const batteryMetric = document.getElementById('battery-metric');
+            const batteryLevelValue = document.getElementById('battery-level-value');
+            const batteryLevelBar = document.getElementById('battery-level-bar');
+            
+            if (energyProfileValue && energyMetrics.current_profile) {
+                // Capitalize first letter of profile name
+                const profileName = energyMetrics.current_profile.charAt(0).toUpperCase() + 
+                                   energyMetrics.current_profile.slice(1);
+                energyProfileValue.textContent = profileName;
+                
+                // Add profile-specific class
+                energyProfileValue.className = `metric-value profile-${energyMetrics.current_profile}`;
+            }
+            
+            if (processingDepthValue && energyMetrics.max_processing_depth) {
+                processingDepthValue.textContent = energyMetrics.max_processing_depth;
+            }
+            
+            // Show battery information if available
+            if (batteryMetric && batteryLevelValue && batteryLevelBar && 
+                typeof energyMetrics.battery_level !== 'undefined') {
+                
+                batteryMetric.style.display = 'block';
+                const batteryPercent = Math.round(energyMetrics.battery_level * 100);
+                batteryLevelValue.textContent = `${batteryPercent}%${energyMetrics.power_plugged ? ' (Charging)' : ''}`;
+                batteryLevelBar.style.width = `${batteryPercent}%`;
+                
+                // Color the battery bar based on level
+                if (batteryPercent < 20) {
+                    batteryLevelBar.style.backgroundColor = '#e74c3c'; // Red for low battery
+                } else if (batteryPercent < 50) {
+                    batteryLevelBar.style.backgroundColor = '#f39c12'; // Orange for medium
+                } else {
+                    batteryLevelBar.style.backgroundColor = '#2ecc71'; // Green for good
+                }
+            } else if (batteryMetric) {
+                batteryMetric.style.display = 'none';
+            }
         }
+    }
+    
+    // Function to display calculation details with transparent formulas
+    function displayCalculationDetails(details) {
+        // Check if calculation details container exists, if not create it
+        let detailsContainer = document.getElementById('calculation-details');
+        if (!detailsContainer) {
+            // Create container for calculation details
+            detailsContainer = document.createElement('div');
+            detailsContainer.id = 'calculation-details';
+            detailsContainer.className = 'calculation-details';
+            
+            // Create toggle button
+            const toggleButton = document.createElement('button');
+            toggleButton.textContent = 'Transparente Formeln anzeigen';
+            toggleButton.className = 'toggle-details-btn';
+            toggleButton.onclick = function() {
+                const content = document.getElementById('calculation-details-content');
+                if (content.style.display === 'none') {
+                    content.style.display = 'block';
+                    this.textContent = 'Transparente Formeln verbergen';
+                } else {
+                    content.style.display = 'none';
+                    this.textContent = 'Transparente Formeln anzeigen';
+                }
+            };
+            
+            // Create content container
+            const contentContainer = document.createElement('div');
+            contentContainer.id = 'calculation-details-content';
+            contentContainer.style.display = 'none';
+            
+            // Add elements to DOM
+            detailsContainer.appendChild(toggleButton);
+            detailsContainer.appendChild(contentContainer);
+            
+            // Add to status panel
+            document.querySelector('.status-panel').appendChild(detailsContainer);
+        }
+        
+        // Get content container
+        const contentContainer = document.getElementById('calculation-details-content');
+        contentContainer.innerHTML = '';
+        
+        // Create sections for each module
+        if (details.intent) {
+            const intentSection = createDetailsSection('Intent-Modul', details.intent);
+            contentContainer.appendChild(intentSection);
+        }
+        
+        if (details.logic) {
+            const logicSection = createDetailsSection('Logic-Modul', details.logic);
+            contentContainer.appendChild(logicSection);
+        }
+        
+        if (details.energy) {
+            const energySection = createDetailsSection('Energy-Modul', details.energy);
+            contentContainer.appendChild(energySection);
+        }
+    }
+    
+    // Helper function to create a details section
+    function createDetailsSection(title, details) {
+        const section = document.createElement('div');
+        section.className = 'details-section';
+        
+        // Add title
+        const sectionTitle = document.createElement('h3');
+        sectionTitle.textContent = title;
+        section.appendChild(sectionTitle);
+        
+        // Add details
+        const detailsList = document.createElement('ul');
+        
+        // Process details recursively
+        function addDetailsToList(obj, list, indent = 0) {
+            for (const [key, value] of Object.entries(obj)) {
+                const item = document.createElement('li');
+                item.style.marginLeft = `${indent * 20}px`;
+                
+                if (typeof value === 'object' && value !== null) {
+                    // It's an object or array, create a nested structure
+                    item.innerHTML = `<strong>${formatKey(key)}:</strong>`;
+                    list.appendChild(item);
+                    
+                    const nestedList = document.createElement('ul');
+                    addDetailsToList(value, nestedList, indent + 1);
+                    list.appendChild(nestedList);
+                } else {
+                    // It's a primitive value
+                    let displayValue = value;
+                    
+                    // Format numbers
+                    if (typeof value === 'number') {
+                        displayValue = value.toFixed(2);
+                    }
+                    
+                    // Highlight formulas
+                    if (key === 'formula') {
+                        item.innerHTML = `<strong>${formatKey(key)}:</strong> <code>${displayValue}</code>`;
+                    } else {
+                        item.innerHTML = `<strong>${formatKey(key)}:</strong> ${displayValue}`;
+                    }
+                    
+                    list.appendChild(item);
+                }
+            }
+        }
+        
+        // Format keys for better readability
+        function formatKey(key) {
+            return key.replace(/_/g, ' ')
+                     .split(' ')
+                     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                     .join(' ');
+        }
+        
+        addDetailsToList(details, detailsList);
+        section.appendChild(detailsList);
+        
+        return section;
     }
     
     // Initial metrics reset

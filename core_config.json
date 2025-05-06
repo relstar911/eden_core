@@ -5,14 +5,58 @@
     "description": "A Contextual, Ethical and Self-Limiting Intelligence Architecture"
   },
   "modules": {
+    "perception": {
+      "enabled": true,
+      "visual_enabled": true,
+      "audio_enabled": true,
+      "sensor_enabled": true,
+      "visual_config": {
+        "enabled": true,
+        "max_resolution": [1280, 720],
+        "meaning_threshold": 0.3
+      },
+      "audio_config": {
+        "enabled": true,
+        "sample_rate": 16000,
+        "meaning_threshold": 0.3
+      },
+      "sensor_config": {
+        "enabled": true,
+        "meaning_threshold": 0.3,
+        "sensors": {
+          "temperature": {
+            "min_value": -50,
+            "max_value": 100
+          },
+          "humidity": {
+            "min_value": 0,
+            "max_value": 100
+          },
+          "light": {
+            "min_value": 0,
+            "max_value": 100000
+          },
+          "motion": {
+            "min_value": 0,
+            "max_value": 1
+          }
+        }
+      }
+    },
     "intent": {
       "enabled": true,
       "threshold": 0.7,
-      "resonance_minimum": 0.6
+      "resonance_minimum": 0.6,
+      "coherence_threshold": 0.3,
+      "transparent_formulas": true
     },
     "logic": {
       "enabled": true,
-      "semantic_integrity_threshold": 0.75
+      "semantic_integrity_threshold": 0.75,
+      "truth_threshold": 0.6,
+      "emotional_depth_analysis": true,
+      "discrepancy_detection": true,
+      "transparent_formulas": true
     },
     "memory": {
       "enabled": true,
@@ -37,7 +81,37 @@
       "ethical_threshold": 0.7,
       "sleep_threshold": 0.4,
       "shutdown_threshold": 0.2,
-      "check_interval": 60
+      "check_interval": 10,
+      "energy_justice_delta": 5.0,
+      "transparent_formulas": true,
+      "night_time_factor": 1.2,
+      "peak_time_factor": 0.8,
+      "normal_time_factor": 1.0,
+      "load_factor": 0.5,
+      "delta_update_interval": 300,
+      "source_check_interval": 60,
+      "adaptive": {
+        "enabled": true,
+        "default_profile": "balanced",
+        "adaptive_mode": true,
+        "energy_profiles": {
+          "eco": {
+            "max_processing_depth": 2,
+            "max_memory_usage": 0.3,
+            "description": "Minimaler Energieverbrauch, reduzierte Funktionalität"
+          },
+          "balanced": {
+            "max_processing_depth": 5,
+            "max_memory_usage": 0.6,
+            "description": "Ausgewogenes Verhältnis zwischen Energieverbrauch und Funktionalität"
+          },
+          "performance": {
+            "max_processing_depth": 10,
+            "max_memory_usage": 0.9,
+            "description": "Maximale Funktionalität, höherer Energieverbrauch"
+          }
+        }
+      }
     }
   },
   "ethics": {

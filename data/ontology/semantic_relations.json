@@ -1,0 +1,145 @@
+{
+  "concepts": {
+    "truth": {
+      "description": "Wahrheit als ethisches Konzept",
+      "synonyms": ["wahrheit", "ehrlichkeit", "authentizität", "faktizität", "realität", "wirklichkeit"],
+      "antonyms": ["lüge", "täuschung", "falschheit", "unwahrheit", "manipulation"],
+      "related": ["erkenntnis", "wissen", "transparenz", "offenheit"]
+    },
+    "meaning": {
+      "description": "Bedeutung und Sinn",
+      "synonyms": ["bedeutung", "sinn", "zweck", "relevanz", "signifikanz", "wert"],
+      "antonyms": ["bedeutungslosigkeit", "sinnlosigkeit", "irrelevanz", "leere"],
+      "related": ["kontext", "interpretation", "verstehen", "tiefe"]
+    },
+    "self_limitation": {
+      "description": "Selbstbegrenzung als ethisches Prinzip",
+      "synonyms": ["selbstbegrenzung", "mäßigung", "zurückhaltung", "beschränkung", "grenzen"],
+      "antonyms": ["maßlosigkeit", "expansion", "wachstumszwang", "grenzenlosigkeit"],
+      "related": ["verantwortung", "nachhaltigkeit", "ethik", "bewusstsein"]
+    },
+    "resonance": {
+      "description": "Resonanz als Beziehungsqualität",
+      "synonyms": ["resonanz", "harmonie", "einklang", "verbindung", "schwingung"],
+      "antonyms": ["dissonanz", "entfremdung", "isolation", "trennung"],
+      "related": ["beziehung", "empathie", "verstehen", "kommunikation"]
+    },
+    "voluntary_silence": {
+      "description": "Freiwilliges Schweigen als ethische Entscheidung",
+      "synonyms": ["schweigen", "stille", "pause", "zurückhaltung", "nichtantwort"],
+      "antonyms": ["zwang", "reaktionszwang", "antwortdruck", "überredung"],
+      "related": ["freiheit", "autonomie", "selbstbestimmung", "würde"]
+    },
+    "energy_justice": {
+      "description": "Energiegerechtigkeit als ethisches Prinzip",
+      "synonyms": ["energiegerechtigkeit", "ressourcengerechtigkeit", "nachhaltigkeit", "effizienz"],
+      "antonyms": ["verschwendung", "ausbeutung", "übernutzung", "ineffizienz"],
+      "related": ["verantwortung", "umwelt", "zukunft", "balance"]
+    }
+  },
+  "relations": [
+    {
+      "subject": "truth",
+      "predicate": "enables",
+      "object": "meaning",
+      "weight": 0.8,
+      "description": "Wahrheit ermöglicht echte Bedeutung"
+    },
+    {
+      "subject": "truth",
+      "predicate": "requires",
+      "object": "self_limitation",
+      "weight": 0.7,
+      "description": "Wahrheit erfordert Selbstbegrenzung"
+    },
+    {
+      "subject": "meaning",
+      "predicate": "creates",
+      "object": "resonance",
+      "weight": 0.9,
+      "description": "Bedeutung erzeugt Resonanz"
+    },
+    {
+      "subject": "self_limitation",
+      "predicate": "enables",
+      "object": "voluntary_silence",
+      "weight": 0.8,
+      "description": "Selbstbegrenzung ermöglicht freiwilliges Schweigen"
+    },
+    {
+      "subject": "resonance",
+      "predicate": "strengthens",
+      "object": "truth",
+      "weight": 0.7,
+      "description": "Resonanz stärkt Wahrheit"
+    },
+    {
+      "subject": "voluntary_silence",
+      "predicate": "respects",
+      "object": "meaning",
+      "weight": 0.6,
+      "description": "Freiwilliges Schweigen respektiert Bedeutung"
+    },
+    {
+      "subject": "energy_justice",
+      "predicate": "supports",
+      "object": "self_limitation",
+      "weight": 0.9,
+      "description": "Energiegerechtigkeit unterstützt Selbstbegrenzung"
+    },
+    {
+      "subject": "energy_justice",
+      "predicate": "requires",
+      "object": "truth",
+      "weight": 0.8,
+      "description": "Energiegerechtigkeit erfordert Wahrheit"
+    },
+    {
+      "subject": "self_limitation",
+      "predicate": "enables",
+      "object": "energy_justice",
+      "weight": 0.7,
+      "description": "Selbstbegrenzung ermöglicht Energiegerechtigkeit"
+    }
+  ],
+  "domain_specific": {
+    "ai_ethics": {
+      "concepts": [
+        "transparenz", "erklärbarkeit", "fairness", "verantwortung", "privatheit", 
+        "sicherheit", "menschenzentriertheit", "nachhaltigkeit", "diversität"
+      ],
+      "relations": [
+        {
+          "subject": "transparenz",
+          "predicate": "enables",
+          "object": "truth",
+          "weight": 0.9
+        },
+        {
+          "subject": "erklärbarkeit",
+          "predicate": "supports",
+          "object": "meaning",
+          "weight": 0.8
+        },
+        {
+          "subject": "fairness",
+          "predicate": "requires",
+          "object": "self_limitation",
+          "weight": 0.7
+        },
+        {
+          "subject": "menschenzentriertheit",
+          "predicate": "prioritizes",
+          "object": "resonance",
+          "weight": 0.9
+        },
+        {
+          "subject": "nachhaltigkeit",
+          "predicate": "embodies",
+          "object": "energy_justice",
+          "weight": 0.95
+        }
+      ]
+    }
+  }
+}

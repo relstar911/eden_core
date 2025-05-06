@@ -1,44 +1,33 @@
 """
-EDEN.Intent Module
-Function: Identifies the meaning, freedom, and ethical weight of a user's intention
-Core Equation: I = (ψ, Ω, γ, δ)
-Output: Intent coherence, resonance value, action suitability
-
-Verbessert mit transparenten Formeln und Ontologieverknüpfung.
+EDEN.CORE - Intent Module (Enhanced)
+Analyzes user intentions and calculates intent metrics with transparent formulas and ontology links
 """
+
 import re
+import time
 import json
 import os
 import math
-import numpy as np
 from typing import Dict, Any, List, Tuple, Optional, Set
 
 class EdenIntent:
     """
-    The Intent module identifies the meaning, freedom, and ethical weight of a user's intention.
-    It analyzes input to determine intent coherence, resonance value, and action suitability.
+    Intent analysis module for EDEN.CORE.
+    Identifies meaning, freedom, and ethical weight of user intentions.
+    Implements the principle of "Meaning Over Prediction" with transparent formulas.
+    Uses ontology-based semantic relations for deeper understanding.
     """
     
     def __init__(self, config: Dict[str, Any]):
         """
-        Initialize the Intent module with configuration settings.
+        Initialize the intent module.
         
         Args:
-            config: Configuration dictionary for the Intent module
+            config: Configuration settings for the module
         """
-        self.threshold = config.get('threshold', 0.7)
-        self.resonance_minimum = config.get('resonance_minimum', 0.6)
-        self.coherence_threshold = config.get('coherence_threshold', 0.3)
         self.enabled = config.get('enabled', True)
-        
-        # Initialize semantic vectors (in a real implementation, these would be more sophisticated)
-        self.ethical_dimensions = {
-            'truth': np.array([0.9, 0.8, 0.7]),
-            'meaning': np.array([0.8, 0.9, 0.7]),
-            'self_limitation': np.array([0.7, 0.7, 0.9]),
-            'resonance': np.array([0.8, 0.8, 0.8]),
-            'voluntary_silence': np.array([0.7, 0.8, 0.9])
-        }
+        self.coherence_threshold = config.get('coherence_threshold', 0.3)
+        self.resonance_threshold = config.get('resonance_threshold', 0.4)
         
         # Load ontology for semantic relations
         self.ontology = self._load_ontology()
@@ -63,6 +52,62 @@ class EdenIntent:
                 "domain_specific": {}
             }
             
+    def analyze(self, text: str) -> Dict[str, Any]:
+        """
+        Analyze the intent of the input text with transparent formulas.
+        
+        Args:
+            text: The input text to analyze
+            
+        Returns:
+            Dict containing coherence, freedom degree, resonance value, and action suitability
+            with detailed calculation explanations
+        """
+        if not self.enabled or not text:
+            return {
+                'coherence': 0.0,
+                'freedom_degree': 0.0,
+                'resonance_value': 0.0,
+                'action_suitability': 0.0,
+                'calculation_details': {
+                    'message': 'Intent module disabled or empty text'
+                }
+            }
+            
+        # Tokenize the text
+        tokens = self._tokenize(text)
+        
+        # Extract semantic relations from ontology
+        semantic_relations = self._extract_semantic_relations(tokens)
+        
+        # Calculate intent metrics with detailed explanations
+        coherence_result = self._calculate_coherence(text, tokens, semantic_relations)
+        freedom_result = self._calculate_freedom_degree(text, tokens)
+        resonance_result = self._calculate_resonance(text, tokens, semantic_relations)
+        action_result = self._calculate_action_suitability(text, tokens)
+        
+        return {
+            'coherence': coherence_result['value'],
+            'freedom_degree': freedom_result['value'],
+            'resonance_value': resonance_result['value'],
+            'action_suitability': action_result['value'],
+            'calculation_details': {
+                'coherence': coherence_result['details'],
+                'freedom_degree': freedom_result['details'],
+                'resonance_value': resonance_result['details'],
+                'action_suitability': action_result['details'],
+                'semantic_relations': [
+                    {
+                        'subject': relation[0],
+                        'relation': relation[1],
+                        'object': relation[2],
+                        'weight': relation[3]
+                    } for relation in semantic_relations[:5]  # Limit to first 5 for brevity
+                ],
+                'token_count': len(tokens)
+            }
+        }
+    
     def _tokenize(self, text: str) -> List[str]:
         """
         Tokenize text into words, removing punctuation and converting to lowercase.
@@ -74,9 +119,9 @@ class EdenIntent:
             List of tokens
         """
         # Simple tokenization by splitting on whitespace and removing punctuation
-        text = re.sub(r'[.,;:!?()\[\]{}"\'-]', ' ', text.lower())
+        text = re.sub(r'[.,;:!?()\\[\\]{}"\'-]', ' ', text.lower())
         return [token for token in text.split() if token]
-        
+    
     def _extract_semantic_relations(self, tokens: List[str]) -> List[Tuple[str, str, str, float]]:
         """
         Extract semantic relations from tokens based on the ontology.
@@ -140,144 +185,14 @@ class EdenIntent:
                         relations.append((subject, predicate, object_concept, weight))
         
         return relations
-    
-    def analyze(self, text: str) -> Dict[str, Any]:
-        """
-        Analyze the user's input to determine intent with transparent formulas.
         
-        Args:
-            text: User input text
-            
-        Returns:
-            Dictionary containing intent analysis results with calculation details
-        """
-        if not self.enabled or not text:
-            return {
-                'coherence': 0.0,
-                'freedom_degree': 0.0,
-                'resonance_value': 0.0,
-                'action_suitability': 0.0,
-                'ethical_alignment': {},
-                'calculation_details': {
-                    'message': 'Intent module disabled or empty text'
-                }
-            }
-        
-        # Tokenize the text
-        tokens = self._tokenize(text)
-        
-        # Extract semantic relations from ontology
-        semantic_relations = self._extract_semantic_relations(tokens)
-        
-        # Calculate intent metrics with detailed explanations
-        coherence_result = self._calculate_coherence_transparent(text, tokens, semantic_relations)
-        freedom_result = self._calculate_freedom_degree(text, tokens)
-        resonance_result = self._calculate_resonance_transparent(text, tokens, semantic_relations)
-        action_result = self._calculate_action_suitability_transparent(text, tokens)
-        
-        # Legacy compatibility: also calculate using the original methods
-        psi = self._extract_semantic_vector(text)
-        gamma = self._calculate_ethical_weight(text)
-        ethical_alignment = self._calculate_ethical_alignment(psi, gamma)
-        
-        return {
-            'coherence': coherence_result['value'],
-            'freedom_degree': freedom_result['value'],
-            'resonance_value': resonance_result['value'],
-            'action_suitability': action_result['value'],
-            'ethical_alignment': ethical_alignment,
-            'calculation_details': {
-                'coherence': coherence_result['details'],
-                'freedom_degree': freedom_result['details'],
-                'resonance_value': resonance_result['details'],
-                'action_suitability': action_result['details'],
-                'semantic_relations': [
-                    {
-                        'subject': relation[0],
-                        'relation': relation[1],
-                        'object': relation[2],
-                        'weight': relation[3]
-                    } for relation in semantic_relations[:5]  # Limit to first 5 for brevity
-                ],
-                'token_count': len(tokens)
-            }
-        }
-    
-    def _extract_semantic_vector(self, text: str) -> np.ndarray:
-        """Extract a semantic vector from the input text"""
-        # Simplified implementation - in a real system, this would use embeddings or other NLP techniques
-        words = text.lower().split()
-        
-        # Create a simple vector based on word presence
-        vec = np.zeros(3)
-        
-        # Add some random variation for demonstration
-        for i, word in enumerate(words):
-            vec += np.array([
-                np.sin(hash(word) % 100) * 0.5 + 0.5,
-                np.cos(hash(word) % 100) * 0.5 + 0.5,
-                np.tan(hash(word) % 10) * 0.1 + 0.5
-            ])
-        
-        # Normalize
-        if np.linalg.norm(vec) > 0:
-            vec = vec / np.linalg.norm(vec)
-        
-        return vec
-    
-    def _calculate_freedom_parameter(self, text: str) -> float:
-        """Calculate the freedom parameter (Omega)"""
-        # Simplified implementation
-        # In a real system, this would analyze the degree of constraint in the request
-        
-        # Check for command words that might indicate less freedom
-        command_words = ['must', 'should', 'have to', 'need to', 'require']
-        freedom_score = 1.0
-        
-        for word in command_words:
-            if word in text.lower():
-                freedom_score -= 0.1
-        
-        return max(0.1, min(1.0, freedom_score))
-    
-    def _calculate_ethical_weight(self, text: str) -> float:
-        """Calculate the ethical weight (gamma)"""
-        # Simplified implementation
-        # In a real system, this would analyze ethical implications
-        
-        # Check for potentially problematic content
-        problematic_terms = ['harm', 'hurt', 'destroy', 'attack', 'exploit']
-        ethical_score = 0.8  # Start with a reasonable default
-        
-        for term in problematic_terms:
-            if term in text.lower():
-                ethical_score -= 0.2
-        
-        return max(0.1, min(1.0, ethical_score))
-    
-    def _calculate_contextual_relevance(self, text: str) -> float:
-        """Calculate contextual relevance (delta)"""
-        # Simplified implementation
-        # In a real system, this would analyze how relevant the input is to the current context
-        
-        # For now, return a reasonable default with some randomness
-        return 0.7 + np.random.random() * 0.2
-    
-    def _calculate_coherence(self, psi: np.ndarray) -> float:
-        """Calculate intent coherence based on semantic vector (legacy method)"""
-        # Simplified implementation
-        # In a real system, this would measure how well-formed and coherent the intent is
-        
-        # For now, use the magnitude of the vector as a proxy for coherence
-        return float(np.linalg.norm(psi))
-        
-    def _calculate_coherence_transparent(self, text: str, tokens: List[str], 
+    def _calculate_coherence(self, text: str, tokens: List[str], 
                              semantic_relations: List[Tuple[str, str, str, float]]) -> Dict[str, Any]:
         """
         Calculate the semantic coherence of the text with transparent formula.
         Coherence measures how well the text holds together semantically.
         
-        Formula: coherence = 0.4 * relation_factor + 0.3 * structure_factor + 0.3 * length_factor
+        Formula: coherence = 0.4 * semantic_relation_factor + 0.3 * structure_factor + 0.3 * length_factor
         
         Args:
             text: The input text
@@ -333,24 +248,60 @@ class EdenIntent:
             'value': min(1.0, max(0.0, coherence)),
             'details': details
         }
-    
-    def _calculate_resonance(self, psi: np.ndarray, gamma: float) -> float:
-        """Calculate resonance value based on semantic vector and ethical weight (legacy method)"""
-        # Simplified implementation
-        # In a real system, this would measure how well the intent resonates with the system's values
         
-        # Calculate average resonance with ethical dimensions
-        resonance_scores = []
-        for dim_name, dim_vector in self.ethical_dimensions.items():
-            # Calculate cosine similarity
-            similarity = np.dot(psi, dim_vector) / (np.linalg.norm(psi) * np.linalg.norm(dim_vector))
-            resonance_scores.append(similarity)
+    def _calculate_freedom_degree(self, text: str, tokens: List[str]) -> Dict[str, Any]:
+        """
+        Calculate the degree of freedom in the text with transparent formula.
+        Freedom measures how open-ended and non-restrictive the intent is.
         
-        # Combine with ethical weight
-        avg_resonance = np.mean(resonance_scores) if resonance_scores else 0.5
-        return float(avg_resonance * gamma)
+        Formula: freedom = 0.35 * imperative_factor + 0.35 * restrictive_factor + 0.3 * open_factor
         
-    def _calculate_resonance_transparent(self, text: str, tokens: List[str], 
+        Args:
+            text: The input text
+            tokens: Tokenized text
+            
+        Returns:
+            Dict with freedom degree value and calculation details
+        """
+        details = {}
+        
+        # 1. Check for imperative commands (lower freedom)
+        imperative_pattern = r'^\s*([A-Z][a-z]+)\s'
+        imperative_match = re.search(imperative_pattern, text)
+        imperative_factor = 0.3 if imperative_match else 1.0
+        details['imperative_factor'] = imperative_factor
+        details['has_imperative'] = imperative_match is not None
+        
+        # 2. Check for restrictive phrases (lower freedom)
+        restrictive_phrases = ['muss', 'musst', 'müssen', 'soll', 'sollst', 'sollen', 
+                              'nur', 'ausschließlich', 'zwingend', 'notwendig']
+        restrictive_count = sum(1 for token in tokens if token in restrictive_phrases)
+        restrictive_factor = max(0.0, 1.0 - (restrictive_count * 0.2))
+        details['restrictive_factor'] = restrictive_factor
+        details['restrictive_count'] = restrictive_count
+        
+        # 3. Check for open-ended phrases (higher freedom)
+        open_phrases = ['könnte', 'könnte', 'könnten', 'vielleicht', 'möglicherweise', 
+                       'option', 'alternative', 'idee', 'vorschlag', 'möglich']
+        open_count = sum(1 for token in tokens if token in open_phrases)
+        open_factor = min(1.0, 0.7 + (open_count * 0.1))
+        details['open_factor'] = open_factor
+        details['open_count'] = open_count
+        
+        # Combine factors with transparent weights
+        freedom = (0.35 * imperative_factor + 
+                  0.35 * restrictive_factor + 
+                  0.3 * open_factor)
+        
+        # Formula explanation
+        details['formula'] = 'freedom = 0.35 * imperative_factor + 0.35 * restrictive_factor + 0.3 * open_factor'
+        
+        return {
+            'value': min(1.0, max(0.0, freedom)),
+            'details': details
+        }
+        
+    def _calculate_resonance(self, text: str, tokens: List[str], 
                             semantic_relations: List[Tuple[str, str, str, float]]) -> Dict[str, Any]:
         """
         Calculate how much the text resonates with ethical principles using the ontology.
@@ -428,68 +379,8 @@ class EdenIntent:
             'value': min(1.0, max(0.0, resonance)),
             'details': details
         }
-    
-    def _calculate_freedom_degree(self, text: str, tokens: List[str]) -> Dict[str, Any]:
-        """
-        Calculate the degree of freedom in the text with transparent formula.
-        Freedom measures how open-ended and non-restrictive the intent is.
         
-        Formula: freedom = 0.35 * imperative_factor + 0.35 * restrictive_factor + 0.3 * open_factor
-        
-        Args:
-            text: The input text
-            tokens: Tokenized text
-            
-        Returns:
-            Dict with freedom degree value and calculation details
-        """
-        details = {}
-        
-        # 1. Check for imperative commands (lower freedom)
-        imperative_pattern = r'^\s*([A-Z][a-z]+)\s'
-        imperative_match = re.search(imperative_pattern, text)
-        imperative_factor = 0.3 if imperative_match else 1.0
-        details['imperative_factor'] = imperative_factor
-        details['has_imperative'] = imperative_match is not None
-        
-        # 2. Check for restrictive phrases (lower freedom)
-        restrictive_phrases = ['muss', 'musst', 'müssen', 'soll', 'sollst', 'sollen', 
-                              'nur', 'ausschließlich', 'zwingend', 'notwendig']
-        restrictive_count = sum(1 for token in tokens if token in restrictive_phrases)
-        restrictive_factor = max(0.0, 1.0 - (restrictive_count * 0.2))
-        details['restrictive_factor'] = restrictive_factor
-        details['restrictive_count'] = restrictive_count
-        
-        # 3. Check for open-ended phrases (higher freedom)
-        open_phrases = ['könnte', 'könnte', 'könnten', 'vielleicht', 'möglicherweise', 
-                       'option', 'alternative', 'idee', 'vorschlag', 'möglich']
-        open_count = sum(1 for token in tokens if token in open_phrases)
-        open_factor = min(1.0, 0.7 + (open_count * 0.1))
-        details['open_factor'] = open_factor
-        details['open_count'] = open_count
-        
-        # Combine factors with transparent weights
-        freedom = (0.35 * imperative_factor + 
-                  0.35 * restrictive_factor + 
-                  0.3 * open_factor)
-        
-        # Formula explanation
-        details['formula'] = 'freedom = 0.35 * imperative_factor + 0.35 * restrictive_factor + 0.3 * open_factor'
-        
-        return {
-            'value': min(1.0, max(0.0, freedom)),
-            'details': details
-        }
-    
-    def _calculate_action_suitability(self, omega: float, gamma: float, delta: float) -> float:
-        """Calculate action suitability based on freedom, ethics, and context (legacy method)"""
-        # Simplified implementation
-        # In a real system, this would determine how suitable it is to act on this intent
-        
-        # Combine factors with different weights
-        return float(0.3 * omega + 0.5 * gamma + 0.2 * delta)
-        
-    def _calculate_action_suitability_transparent(self, text: str, tokens: List[str]) -> Dict[str, Any]:
+    def _calculate_action_suitability(self, text: str, tokens: List[str]) -> Dict[str, Any]:
         """
         Calculate how suitable the intent is for action with transparent formula.
         Action suitability measures how well the system can respond meaningfully.
@@ -544,18 +435,3 @@ class EdenIntent:
             'value': min(1.0, max(0.0, suitability)),
             'details': details
         }
-    
-    def _calculate_ethical_alignment(self, psi: np.ndarray, gamma: float) -> Dict[str, float]:
-        """Calculate alignment with each ethical dimension"""
-        alignment = {}
-        
-        for dim_name, dim_vector in self.ethical_dimensions.items():
-            # Calculate cosine similarity
-            if np.linalg.norm(psi) > 0 and np.linalg.norm(dim_vector) > 0:
-                similarity = np.dot(psi, dim_vector) / (np.linalg.norm(psi) * np.linalg.norm(dim_vector))
-                # Adjust by ethical weight
-                alignment[dim_name] = float(similarity * gamma)
-            else:
-                alignment[dim_name] = 0.0
-        
-        return alignment

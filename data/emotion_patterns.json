@@ -1,0 +1,156 @@
+{
+  "emotions": {
+    "joy": {
+      "description": "Freude, Glück, positive Emotionen",
+      "patterns": [
+        "\\b(froh|glücklich|begeistert|erfreut|fröhlich)\\b",
+        "\\b(freude|glück|begeisterung)\\b",
+        "\\bliebe\\b(?!.*\\bnicht\\b)",
+        "\\b(wunderbar|toll|großartig|fantastisch)\\b",
+        "\\b(lachen|lächeln|grinsen)\\b"
+      ],
+      "intensity_modifiers": {
+        "high": ["sehr", "außerordentlich", "unglaublich", "extrem"],
+        "low": ["etwas", "leicht", "ein bisschen", "ein wenig"]
+      }
+    },
+    "sadness": {
+      "description": "Traurigkeit, Kummer, negative Emotionen",
+      "patterns": [
+        "\\b(traurig|betrübt|niedergeschlagen|deprimiert)\\b",
+        "\\b(trauer|kummer|leid|schmerz)\\b",
+        "\\b(weinen|tränen|schluchzen)\\b",
+        "\\b(verlust|verloren|vermissen)\\b",
+        "\\b(hoffnungslos|verzweifelt)\\b"
+      ],
+      "intensity_modifiers": {
+        "high": ["tiefe", "große", "schwere", "überwältigende"],
+        "low": ["leichte", "kleine", "vorübergehende"]
+      }
+    },
+    "anger": {
+      "description": "Wut, Ärger, Zorn",
+      "patterns": [
+        "\\b(wütend|verärgert|zornig|aufgebracht)\\b",
+        "\\b(wut|ärger|zorn|empörung)\\b",
+        "\\b(frustriert|genervt|gereizt)\\b",
+        "\\b(schreien|brüllen|toben)\\b",
+        "\\b(hassen|hass)\\b"
+      ],
+      "intensity_modifiers": {
+        "high": ["rasende", "extreme", "heftige", "unbändige"],
+        "low": ["leichte", "kleine", "milde"]
+      }
+    },
+    "fear": {
+      "description": "Angst, Furcht, Besorgnis",
+      "patterns": [
+        "\\b(ängstlich|furchtsam|besorgt|beunruhigt)\\b",
+        "\\b(angst|furcht|sorge|panik)\\b",
+        "\\b(erschrocken|erschüttert|entsetzt)\\b",
+        "\\b(gefahr|bedrohung|risiko)\\b",
+        "\\b(zittern|schaudern|beben)\\b"
+      ],
+      "intensity_modifiers": {
+        "high": ["panische", "lähmende", "überwältigende", "existenzielle"],
+        "low": ["leichte", "vage", "unterschwellige"]
+      }
+    },
+    "surprise": {
+      "description": "Überraschung, Erstaunen, Verwunderung",
+      "patterns": [
+        "\\b(überrascht|erstaunt|verblüfft|verwundert)\\b",
+        "\\b(überraschung|erstaunen|verwunderung)\\b",
+        "\\b(unerwartet|plötzlich|unverhofft)\\b",
+        "\\b(schock|schockiert)\\b",
+        "\\b(wow|oh|ach)\\b"
+      ],
+      "intensity_modifiers": {
+        "high": ["völlig", "komplett", "absolut", "total"],
+        "low": ["etwas", "leicht", "ein wenig"]
+      }
+    },
+    "trust": {
+      "description": "Vertrauen, Zuversicht, Sicherheit",
+      "patterns": [
+        "\\b(vertrauen|zuversicht|sicherheit)\\b",
+        "\\b(verlässlich|zuverlässig|treu)\\b",
+        "\\b(glauben an|überzeugt von)\\b",
+        "\\b(ehrlich|aufrichtig|integer)\\b",
+        "\\b(vertrauenswürdig|glaubwürdig)\\b"
+      ],
+      "intensity_modifiers": {
+        "high": ["vollständiges", "unerschütterliches", "tiefes", "absolutes"],
+        "low": ["vorsichtiges", "bedingtes", "wachsendes"]
+      }
+    },
+    "anticipation": {
+      "description": "Erwartung, Vorfreude, Hoffnung",
+      "patterns": [
+        "\\b(erwarten|vorfreuen|hoffen)\\b",
+        "\\b(erwartung|vorfreude|hoffnung)\\b",
+        "\\b(gespannt|neugierig)\\b",
+        "\\b(aussicht|zukunft|bald)\\b",
+        "\\b(potential|möglichkeit|chance)\\b"
+      ],
+      "intensity_modifiers": {
+        "high": ["große", "intensive", "brennende", "fiebrige"],
+        "low": ["leichte", "vage", "gedämpfte"]
+      }
+    },
+    "disgust": {
+      "description": "Ekel, Abscheu, Widerwillen",
+      "patterns": [
+        "\\b(ekelhaft|abstoßend|widerlich)\\b",
+        "\\b(ekel|abscheu|widerwillen)\\b",
+        "\\b(angewidert|abgestoßen)\\b",
+        "\\b(übelkeit|erbrechen)\\b",
+        "\\b(schmutzig|verdorben|verfault)\\b"
+      ],
+      "intensity_modifiers": {
+        "high": ["tiefe", "extreme", "überwältigende"],
+        "low": ["leichte", "milde", "flüchtige"]
+      }
+    }
+  },
+  "emotional_patterns": {
+    "ambivalence": {
+      "description": "Gleichzeitiges Auftreten widersprüchlicher Emotionen",
+      "pattern": "(?=.*\\b(freude|glück|liebe)\\b)(?=.*\\b(trauer|angst|sorge)\\b)"
+    },
+    "emotional_depth": {
+      "description": "Tiefe emotionale Reflexion",
+      "pattern": "\\b(tief|tiefe|tiefgreifend|fundamental)\\b.{0,30}\\b(gefühl|emotion|empfindung)\\b"
+    },
+    "emotional_complexity": {
+      "description": "Komplexe emotionale Zustände",
+      "pattern": "\\b(gemischt|komplex|vielschichtig|nuanciert)\\b.{0,30}\\b(gefühl|emotion|empfindung)\\b"
+    },
+    "emotional_growth": {
+      "description": "Emotionale Entwicklung oder Transformation",
+      "pattern": "\\b(wachsen|entwickeln|verändern|transformieren)\\b.{0,50}\\b(gefühl|emotion|empfindung)\\b"
+    },
+    "emotional_awareness": {
+      "description": "Bewusstsein über eigene Emotionen",
+      "pattern": "\\b(bewusst|gewahr|erkennen|verstehen)\\b.{0,30}\\b(gefühl|emotion|empfindung)\\b"
+    }
+  },
+  "discrepancy_patterns": {
+    "cognitive_emotional_mismatch": {
+      "description": "Diskrepanz zwischen kognitiven Aussagen und emotionalem Ausdruck",
+      "pattern": "(?=.*\\b(denken|glauben|meinen|wissen)\\b)(?=.*\\b(fühlen|empfinden)\\b)(?=.*\\b(aber|jedoch|trotzdem|dennoch)\\b)"
+    },
+    "stated_felt_contradiction": {
+      "description": "Widerspruch zwischen Aussage und gefühltem Zustand",
+      "pattern": "\\b(sage|behaupte|erkläre)\\b.{0,50}\\b(fühle|spüre)\\b.{0,50}\\b(anders|gegenteil|nicht)\\b"
+    },
+    "emotional_suppression": {
+      "description": "Unterdrückung von Emotionen",
+      "pattern": "\\b(unterdrücke|verberge|verstecke|halte zurück)\\b.{0,30}\\b(gefühl|emotion|empfindung)\\b"
+    },
+    "emotional_denial": {
+      "description": "Verleugnung von Emotionen",
+      "pattern": "\\b(nicht|kein)\\b.{0,10}\\b(traurig|wütend|ängstlich|besorgt)\\b"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+/* Styles for transparent formula display */
+.calculation-details {
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+}
+
+.toggle-details-btn {
+    background-color: #4a5568;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.toggle-details-btn:hover {
+    background-color: #2d3748;
+}
+
+.details-section {
+    margin-bottom: 20px;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.details-section h3 {
+    margin-top: 0;
+    color: #2d3748;
+    font-size: 16px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 8px;
+}
+
+.details-section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.details-section li {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.details-section code {
+    background-color: #edf2f7;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: monospace;
+    color: #805ad5;
+}
