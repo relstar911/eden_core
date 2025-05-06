@@ -1,0 +1,101 @@
+/* EDEN.CORE - Main Stylesheet */
+
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #27ae60;
+    --background-color: #f5f5f5;
+    --text-color: #333;
+    --accent-color: #3498db;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+    border-bottom: 4px solid var(--secondary-color);
+}
+
+h1, h2, h3 {
+    margin-top: 0;
+}
+
+.subtitle {
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #219653;
+}
+
+.progress-bar {
+    height: 8px;
+    background-color: #ddd;
+    border-radius: 4px;
+    margin-top: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--accent-color);
+    border-radius: 4px;
+    transition: width 0.3s;
+}
+
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 1rem 0;
+    color: #777;
+    font-size: 0.9rem;
+    border-top: 1px solid #ddd;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 10px;
+    }
+    
+    .card {
+        padding: 1.5rem;
+    }
+}

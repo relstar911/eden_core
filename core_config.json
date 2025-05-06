@@ -1,0 +1,51 @@
+{
+  "system": {
+    "name": "EDEN.CORE",
+    "version": "0.1-alpha",
+    "description": "A Contextual, Ethical and Self-Limiting Intelligence Architecture"
+  },
+  "modules": {
+    "intent": {
+      "enabled": true,
+      "threshold": 0.7,
+      "resonance_minimum": 0.6
+    },
+    "logic": {
+      "enabled": true,
+      "semantic_integrity_threshold": 0.75
+    },
+    "memory": {
+      "enabled": true,
+      "retention_period": 30,
+      "context_weight": 0.8,
+      "decay_rate": 0.05
+    },
+    "interface": {
+      "enabled": true,
+      "input_modes": ["text"],
+      "output_modes": ["text"]
+    },
+    "resilience": {
+      "enabled": true,
+      "self_exit_conditions": {
+        "resonance_collapse_threshold": 0.3,
+        "ethical_corruption_threshold": 0.4
+      }
+    },
+    "energy": {
+      "enabled": true,
+      "ethical_threshold": 0.7,
+      "sleep_threshold": 0.4,
+      "shutdown_threshold": 0.2,
+      "check_interval": 60
+    }
+  },
+  "ethics": {
+    "truth_priority": 1.0,
+    "meaning_priority": 0.9,
+    "self_limitation_priority": 0.95,
+    "resonance_priority": 0.85,
+    "voluntary_silence_priority": 0.8,
+    "energy_justice_priority": 0.9
+  }
+}
