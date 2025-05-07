@@ -213,30 +213,28 @@ class EdenAdaptiveEnergy(EdenEnergy):
         
         return status
     
-    def should_limit_processing(self, input_complexity: float) -> Dict[str, Any]:
+    def limit_readiness(self, input_complexity: float) -> Dict[str, Any]:
         """
-        Entscheidet, ob die Verarbeitung basierend auf Eingabekomplexität und Energieprofil begrenzt werden sollte.
-        
-        Args:
-            input_complexity: Komplexität der Eingabe (0.0 bis 10.0)
-            
-        Returns:
-            Dict[str, Any]: Informationen zur Verarbeitungsbegrenzung
+        Kontinuierliche Bereitschaft zur Verarbeitungsbegrenzung (0.0 = keine Begrenzung, 1.0 = maximale Begrenzung)
+        Basierend auf dem Verhältnis von input_complexity zu max_processing_depth.
         """
         profile_name = self.select_energy_profile()
         profile = self.energy_profiles[profile_name]
         max_depth = profile.get('max_processing_depth', 5)
-        
-        should_limit = input_complexity > max_depth
+        # Skalenwert: je mehr input_complexity das Limit übersteigt, desto höher die readiness
+        if input_complexity <= max_depth:
+            readiness = 0.0
+        else:
+            # Linearer Anstieg, maximal 1.0
+            readiness = min(1.0, (input_complexity - max_depth) / max(1.0, max_depth))
         limit_info = {
-            'should_limit': should_limit,
+            'limit_readiness': readiness,
             'max_depth': max_depth,
             'input_complexity': input_complexity,
             'current_profile': profile_name
         }
-        
-        if should_limit:
+        if readiness > 0.0:
             limit_info['reason'] = f"Input complexity ({input_complexity:.1f}) exceeds profile limit ({max_depth})"
             limit_info['recommended_depth'] = max_depth
-        
         return limit_info
+

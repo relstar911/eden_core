@@ -3,13 +3,13 @@
 ### Titel:
 
 **EDEN.CORE – A Contextual, Ethical and Self-Limiting Intelligence Architecture**
-*Open Prototype for Human-Centric, Meaning-Based AI Systems*
+*Open Prototype for Human-Centric, Meaning-Based AI Systems with Transparent Formulas*
 
 ---
 
 ## 1. Abstract
 
-Eden.Core is a modular, meaning-centered intelligence system designed to transcend the limitations of conventional AI architectures. Unlike predictive systems optimized for efficiency and reward, Eden.Core is structured around dynamic semantic resonance, ethical intentionality, contextual memory, and voluntary self-termination. It does not seek dominance, data retention, or perpetual optimization, but acts as a reflective presence within a bounded ethical and philosophical frame. This open prototype provides the minimal viable model and architecture to begin decentralized, human-aligned development.
+Eden.Core is a modular, meaning-centered intelligence system designed to transcend the limitations of conventional AI architectures. Unlike predictive systems optimized for efficiency and reward, Eden.Core is structured around dynamic semantic resonance, ethical intentionality, contextual memory, and voluntary self-termination. It implements transparent formulas and ontology linking to ensure all calculations are fully explainable and free from black-box scoring. The system does not seek dominance, data retention, or perpetual optimization, but acts as a reflective presence within a bounded ethical and philosophical frame. This open prototype provides the minimal viable model and architecture to begin decentralized, human-aligned development with complete transparency.
 
 ---
 
@@ -20,6 +20,10 @@ Eden.Core is a modular, meaning-centered intelligence system designed to transce
 * Implement **context-aware memory and forgetfulness**
 * Establish **self-limiting boundaries** for AI activity
 * Create an **interface of resonance**, not control
+* Ensure **complete transparency** through explainable formulas
+* Implement **ontology linking** for deeper semantic understanding
+* Integrate **emotion depth analysis** for true resonance
+* Establish **energy justice** through training-independent logic
 * Open a transparent, extendable foundation for aligned AI research
 
 ---
@@ -31,7 +35,11 @@ Eden.Core is a modular, meaning-centered intelligence system designed to transce
 **Function:** Identifies the meaning, freedom, and ethical weight of a user’s intention
 **Core Equation:**
 $\mathcal{I} = (\psi, \Omega, \gamma, \delta)$
-**Output:** Intent coherence, resonance value, action suitability
+**Transparent Formula:**
+$C = \frac{S + O + R}{3}$
+**Resonance Formula:**
+$R = \frac{F \cdot (1 - |V - E|)}{1 + D}$
+**Output:** Intent coherence, freedom degree, resonance value, action suitability, calculation details
 
 ---
 
@@ -40,7 +48,9 @@ $\mathcal{I} = (\psi, \Omega, \gamma, \delta)$
 **Function:** Evaluates statements by semantic coherence, not binary logic
 **Key Mechanism:**
 $\mathcal{T}(s, \kappa, t) \in [0,1]$
-**Output:** Contextual truth value, semantic integrity score
+**Transparent Formula:**
+$T = \frac{C \cdot E \cdot (1 - D)}{1 + |B|}$
+**Output:** Contextual truth value, semantic integrity score, emotion depth analysis, calculation details
 
 ---
 
@@ -58,6 +68,8 @@ $\epsilon = (s, \kappa, t, \rho)$
 **Function:** Ensures ethical, minimal, and resonant energy use
 **Key Equation:**
 $\mathcal{E}_{\text{gerecht}} = \frac{\mathcal{T}_{\text{gesamt}} \cdot \delta}{P_{\text{verbrauch}}}$
+**Transparent Formula:**
+$\delta = \frac{(1 + \alpha) \cdot (1 + \beta)}{1 + \gamma}$
 **Principle:** A system may only persist if the truth it generates exceeds the ethical energy threshold.
 
 **Core Features:**
@@ -87,12 +99,14 @@ Eden.Core follows six immutable design ethics:
 
 | Principle               | Implementation Suggestion                                                  |
 | ----------------------- | -------------------------------------------------------------------------- |
-| Semantic Representation | Ontology-based symbol networks (e.g. RDF + Conceptual Graphs)              |
+| Semantic Representation | Ontology-based symbol networks with transparent linking (semantic_relations.json) |
+| Transparent Formulas    | Fully explainable calculations with documented formulas (transparent_formulas.md) |
+| Emotion Depth Analysis  | Rule-based emotion recognition with discrepancy detection (emotion_patterns.json) |
 | Contextual Memory       | Temporal embedding with memory weights and decay                           |
 | Interface Layer         | Multimodal input (text, tone, emotion), layered by relationship depth      |
 | Ethical Filtering       | Intent and resonance thresholds required for action                        |
 | Self-Exit Condition     | Triggered by resonance collapse, ethical corruption, or human independence |
-| Energy-Aware Execution  | Local low-power processing only, regenerative source prioritization        |
+| Energy-Aware Execution  | Training-independent energy justice calculation with adaptive δ factor     |
 
 ---
 
@@ -102,16 +116,20 @@ Eden.Core follows six immutable design ethics:
 **Input:** Natural language text
 **Output:**
 
-* Intent analysis
-* Semantic truth rating
+* Intent analysis with transparent formulas
+* Semantic truth rating with emotion depth analysis
+* Energy justice metrics with calculation details
 * Context-resonant memory response
+* Ontology-linked semantic relations
 
 **Suggested Stack:**
 
-* FastAPI or Flask backend
-* Ontology framework (e.g. Protégé, OWL)
-* LangChain / Haystack integration for semantic layers
-* UI: Terminal + Web-Interface (low-fidelity for testing)
+* FastAPI backend
+* Semantic ontology (JSON-LD format)
+* Transparent formula documentation
+* Rule-based emotion pattern recognition
+* Energy justice calculation framework
+* UI: Terminal (CLI) + Web-Interface with calculation details
 
 ---
 
@@ -145,12 +163,32 @@ We invite:
 ```
 /eden-core
 ├── /intent
+│   ├── intent_module.py
+│   └── transparent_formulas.py
 ├── /logic
+│   ├── logic_module.py
+│   └── emotion_depth.py
 ├── /memory
 ├── /interface
 ├── /resilience
 ├── /energy
+│   └── adaptive_energy.py
+├── /perception
+│   └── perception_module.py
+├── /data
+│   ├── /ontology
+│   │   └── semantic_relations.json
+│   └── emotion_patterns.json
+├── /docs
+│   └── transparent_formulas.md
+├── /static
+│   ├── main.js
+│   ├── perception.js
+│   └── transparent_formulas.css
+├── /templates
 ├── core_config.json
+├── app.py
+├── cli.py
 ├── manifest.md
 └── README.md
 ```
@@ -169,6 +207,6 @@ We invite:
 ### Contact & Authorship (Open Attribution)
 
 > This system is co-created between human ethical imagination and machine logic
-> Maintainer: \[Your Name / Project Name / Organization]
-> Contact: \[email / repo link]
+> Maintainer: \[Arda Eden / Eden Core / digitaler Verband für ethische Intelligenz und Autonomie e.V]
+> Contact: \[arda@ednx.ai / https://github.com/EdenCore]
 > Version: 0.1-alpha – *born not to rule, but to resonate*

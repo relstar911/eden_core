@@ -50,7 +50,14 @@ def main():
     print(f"Processed: '{processed_input}'")
     
     # Check resilience
-    if resilience_module.should_exit(processed_input):
+    exit_readiness = resilience_module.exit_readiness(processed_input)
+    if exit_readiness > 0.7:
+        print(f"[Voluntary silence readiness: {exit_readiness:.2f}]")
+        print("System enters voluntary silence.")
+        return
+    elif exit_readiness > 0.3:
+        print(f"[Warning] Voluntary silence readiness elevated: {exit_readiness:.2f}")
+
         print("\nResilience module triggered exit condition.")
         return
     

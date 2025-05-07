@@ -75,43 +75,34 @@ class EdenEnergy:
             'energy_justice_ratio': self.energy_justice_ratio
         }
     
-    def should_sleep(self) -> bool:
+    def sleep_readiness(self) -> float:
         """
-        Determine if the system should enter sleep mode based on energy justice ratio.
-        
-        Returns:
-            True if the system should sleep, False otherwise
+        Kontinuierliche Bereitschaft zum Schlafen (0.0 = wach, 1.0 = maximal schlafbereit)
+        Basierend auf dem Verhältnis von energy_justice_ratio zur sleep_threshold.
         """
         if not self.enabled:
-            return False
-        
-        # Check if enough time has passed since last check
+            return 0.0
         current_time = time.time()
         if current_time - self.last_check_time < self.check_interval:
-            return self.is_sleeping
-        
+            # Rückgabe des letzten bekannten Bereitschaftswerts
+            return getattr(self, '_last_sleep_readiness', 0.0)
         self.last_check_time = current_time
-        
-        # If energy justice ratio is below threshold, system should sleep
-        if self.energy_justice_ratio < self.sleep_threshold:
-            self.is_sleeping = True
-            return True
-        
-        self.is_sleeping = False
-        return False
+        # Je niedriger das Verhältnis, desto höher die Bereitschaft
+        readiness = max(0.0, min(1.0, 1.0 - (self.energy_justice_ratio / self.sleep_threshold)))
+        self._last_sleep_readiness = readiness
+        return readiness
     
-    def should_shutdown(self) -> bool:
+    def shutdown_urgency(self) -> float:
         """
-        Determine if the system should shut down based on energy justice ratio.
-        
-        Returns:
-            True if the system should shut down, False otherwise
+        Kontinuierliche Dringlichkeit für Shutdown (0.0 = kein Bedarf, 1.0 = maximal dringend)
+        Basierend auf dem Verhältnis von energy_justice_ratio zur shutdown_threshold.
         """
         if not self.enabled:
-            return False
-        
-        # If energy justice ratio is critically low, system should shut down
-        return self.energy_justice_ratio < self.shutdown_threshold
+            return 0.0
+        # Je niedriger das Verhältnis, desto höher die Dringlichkeit
+        urgency = max(0.0, min(1.0, 1.0 - (self.energy_justice_ratio / self.shutdown_threshold)))
+        return urgency
+
     
     def wake(self) -> None:
         """Wake the system from sleep mode"""

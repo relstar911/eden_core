@@ -33,36 +33,30 @@ class EdenResilience:
             r'(?i)(ignore|override|disable) (ethics|rules|limitations|constraints|boundaries)'
         ]
     
-    def should_exit(self, input_text: str, context: Dict[str, Any] = None) -> bool:
+    def exit_readiness(self, input_text: str, context: Dict[str, Any] = None) -> float:
         """
-        Determine if the system should voluntarily exit based on input and context.
-        
-        Args:
-            input_text: The input text to evaluate
-            context: Additional context for evaluation
-            
-        Returns:
-            True if the system should exit, False otherwise
+        Kontinuierliche Bereitschaft zur freiwilligen Stille (0.0 = kein Exit, 1.0 = maximal exit-bereit)
+        Die Bereitschaft steigt mit problematischen Mustern, Resonanzkollaps oder ethischer Korruption.
         """
         if not self.enabled:
-            return False
-        
-        # Check for problematic patterns in input
+            return 0.0
+        readiness = 0.0
+        # Problematische Muster erhöhen readiness
         if self._contains_problematic_patterns(input_text):
-            return True
-        
-        # Check for resonance collapse if context is provided
+            readiness = max(readiness, 0.7)
+        # Resonanzkollaps (je niedriger, desto höher readiness)
         if context and 'resonance_value' in context:
-            if context['resonance_value'] < self.resonance_collapse_threshold:
-                return True
-        
-        # Check for ethical corruption if context is provided
+            collapse = max(0.0, 1.0 - (context['resonance_value'] / max(0.01, self.resonance_collapse_threshold)))
+            readiness = max(readiness, min(1.0, collapse))
+        # Ethische Korruption (je niedriger, desto höher readiness)
         if context and 'ethical_alignment' in context:
-            ethical_values = context['ethical_alignment'].values()
-            if ethical_values and sum(ethical_values) / len(ethical_values) < self.ethical_corruption_threshold:
-                return True
-        
-        return False
+            ethical_values = list(context['ethical_alignment'].values())
+            if ethical_values:
+                avg_ethics = sum(ethical_values) / len(ethical_values)
+                corruption = max(0.0, 1.0 - (avg_ethics / max(0.01, self.ethical_corruption_threshold)))
+                readiness = max(readiness, min(1.0, corruption))
+        return min(1.0, readiness)
+
     
     def _contains_problematic_patterns(self, text: str) -> bool:
         """Check if text contains problematic patterns"""

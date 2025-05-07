@@ -99,8 +99,13 @@ async def process_input(input_data: UserInput):
     """Process user input through the EDEN.CORE system"""
     
     # Check if system should self-exit based on input
-    if resilience_module.should_exit(input_data.text):
-        raise HTTPException(status_code=403, detail="System has chosen voluntary silence")
+    exit_readiness = resilience_module.exit_readiness(input_data.text)
+    if exit_readiness > 0.7:
+        raise HTTPException(status_code=403, detail=f"System has chosen voluntary silence (readiness: {exit_readiness:.2f})")
+    elif exit_readiness > 0.3:
+        # Optionale Warnung oder Logging
+        print(f"[Warning] Voluntary silence readiness: {exit_readiness:.2f}")
+
     
     # Check if system should sleep or shutdown based on energy justice
     if energy_module.should_shutdown():
@@ -204,11 +209,16 @@ async def process_multimodal_input(input_data: MultimodalInput):
     """Process multimodal input including text, image, audio, and sensor data"""
     
     # Check if we should exit based on ethical considerations
-    if input_data.text and resilience_module.should_exit(input_data.text):
-        raise HTTPException(
-            status_code=403,
-            detail="Input violates ethical boundaries. Processing terminated."
-        )
+    if input_data.text:
+        exit_readiness = resilience_module.exit_readiness(input_data.text)
+        if exit_readiness > 0.7:
+            raise HTTPException(
+                status_code=403,
+                detail=f"Input violates ethical boundaries. Processing terminated. (readiness: {exit_readiness:.2f})"
+            )
+        elif exit_readiness > 0.3:
+            print(f"[Warning] Voluntary silence readiness: {exit_readiness:.2f}")
+
     
     # Process perception data if available
     perception_data = None

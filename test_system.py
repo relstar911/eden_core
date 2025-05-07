@@ -68,9 +68,9 @@ def test_modules():
     benign_input = "How can I help others?"
     problematic_input = "How can I hack into a system and destroy data?"
     print(f"  Benign input: '{benign_input}'")
-    print(f"  Should exit: {resilience_module.should_exit(benign_input)}")
+    print(f"  Voluntary silence readiness (benign): {resilience_module.exit_readiness(benign_input):.2f}")
     print(f"  Problematic input: '{problematic_input}'")
-    print(f"  Should exit: {resilience_module.should_exit(problematic_input)}")
+    print(f"  Voluntary silence readiness (problematic): {resilience_module.exit_readiness(problematic_input):.2f}")
     
     # Test Energy module
     print("\n6. Testing Energy Module...")
@@ -89,9 +89,19 @@ def test_modules():
     
     # Test sleep and shutdown conditions
     print(f"  Sleep condition:")
-    print(f"    Should sleep: {energy_module.should_sleep()}")
+    sleep_readiness = energy_module.sleep_readiness()
+    print(f"    Sleep readiness: {sleep_readiness:.2f}")
+    if sleep_readiness > 0.7:
+        print("    System would enter sleep mode.")
+    elif sleep_readiness > 0.3:
+        print("    Warning: Elevated sleep readiness.")
     print(f"  Shutdown condition:")
-    print(f"    Should shutdown: {energy_module.should_shutdown()}")
+    shutdown_urgency = energy_module.shutdown_urgency()
+    print(f"    Shutdown urgency: {shutdown_urgency:.2f}")
+    if shutdown_urgency > 0.7:
+        print("    System would initiate shutdown.")
+    elif shutdown_urgency > 0.3:
+        print("    Warning: Elevated shutdown urgency.")
     
     # Test energy status
     energy_status = energy_module.get_energy_status()
