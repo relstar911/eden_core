@@ -21,128 +21,127 @@ Die Erweiterungen müssen im Einklang mit den sechs ethischen Grundprinzipien vo
 
 **Ziel**: Erweiterung der Eingabeverarbeitung über Text hinaus auf Bild, Audio und Sensordaten.
 
-**Komponenten**:
-- **VisualPerception**: Verarbeitung von Bildern und Videostreams
-- **AudioPerception**: Verarbeitung von Sprache und Umgebungsgeräuschen
-- **SensorIntegration**: Einbindung von IoT-Sensoren und Umgebungsdaten
+**Components**:
+- **VisualPerception**: Processing of images and video streams
+- **AudioPerception**: Processing of speech and environmental sounds
+- **SensorIntegration**: Integration of IoT sensors and environmental data
 
-**Ethische Integration**:
-- Implementierung von Wahrnehmungsschwellen basierend auf dem Prinzip "Bedeutung über Vorhersage"
-- Energieeffiziente Verarbeitung gemäß "Energiegerechtigkeit über Leistung"
-- Optionale Deaktivierung bestimmter Wahrnehmungskanäle für "Selbstbegrenzung über Wachstum"
+**Ethical Validation**:
+- Implementation of perception thresholds based on the principle "Meaning over Prediction"
+- Energy-efficient processing in accordance with "Energy Justice over Performance"
+- Optional deactivation of specific perception channels for "Self-Limitation over Growth"
 
-**Technische Anforderungen**:
-- Schnittstellen für Kamera, Mikrofon und Sensoren
-- Effiziente Bildverarbeitungsalgorithmen
-- Spracherkennungs- und Audioverarbeitungsbibliotheken
+**Technical Requirements**:
+- Interfaces for camera, microphone, and sensors
+- Efficient image processing algorithms
+- Speech recognition and audio processing libraries
 
-### 2. Adaptives Lernen (EdenAdaptation)
+### 2. Adaptive Learning (EdenAdaptation)
 
-**Ziel**: Entwicklung von Mechanismen zur Anpassung des Systems basierend auf Erfahrungen und Feedback.
+**Objective**: Develop mechanisms for adapting the system based on experiences and feedback.
 
-**Komponenten**:
-- **FeedbackProcessor**: Verarbeitung von explizitem und implizitem Feedback
-- **ParameterOptimizer**: Dynamische Anpassung von Systemparametern
-- **TransferLearning**: Übertragung von Wissen zwischen Domänen
+**Components**:
+- **FeedbackProcessor**: Processing of explicit and implicit feedback
+- **ParameterOptimizer**: Dynamic adjustment of system parameters
+- **TransferLearning**: Transfer of knowledge between domains
 
-**Ethische Integration**:
-- Lernprozesse, die "Wahrheit über Optimierung" priorisieren
-- Anpassungsgeschwindigkeit begrenzt durch "Selbstbegrenzung über Wachstum"
-- Feedbackverarbeitung basierend auf "Resonanz über Reaktion"
+**Ethical Validation**:
+- Learning processes that prioritize "Truth over Optimization"
+- Adaptation speed limited by "Self-Limitation over Growth"
+- Feedback processing based on "Resonance over Reaction"
 
-**Technische Anforderungen**:
-- Feedback-Erfassungsmechanismen
-- Parameter-Tracking und Optimierungsalgorithmen
-- Persistente Speicherung von Lernfortschritten
+**Technical Requirements**:
+- Feedback collection mechanisms
+- Parameter tracking and optimization algorithms
+- Persistent storage of learning progress
 
-### 3. Umgebungskontext (EdenContext)
+### 3. Environmental Context (EdenContext)
 
-**Ziel**: Integration von Umgebungsinformationen in die Entscheidungsfindung.
+**Objective**: Integrate environmental information into decision-making.
 
-**Komponenten**:
-- **LocationAwareness**: Standortbezogene Informationen und Dienste
-- **TemporalAwareness**: Zeit- und Kalenderbewusstsein
-- **EnvironmentalSensing**: Umgebungsbedingungen (Temperatur, Licht, etc.)
+**Components**:
+- **LocationAwareness**: Location-based information and services
+- **TemporalAwareness**: Time and calendar awareness
+- **EnvironmentalSensing**: Environmental conditions (temperature, light, etc.)
 
-**Ethische Integration**:
-- Kontextuelle Relevanz basierend auf "Bedeutung über Vorhersage"
-- Privatsphäre-respektierende Datenverarbeitung gemäß "Selbstbegrenzung über Wachstum"
-- Kontextabhängige Energienutzung für "Energiegerechtigkeit über Leistung"
+**Ethical Validation**:
+- Contextual relevance based on "Meaning over Prediction"
+- Privacy-respecting data processing in accordance with "Self-Limitation over Growth"
+- Context-dependent energy usage for "Energy Justice over Performance"
 
-**Technische Anforderungen**:
-- Geolokalisierungsdienste
-- Zeitzonenverarbeitung und Kalenderschnittstellen
-- Umgebungssensorintegration
+**Technical Requirements**:
+- Geolocation services
+- Time zone processing and calendar interfaces
+- Environmental sensor integration
 
-### 4. Energieadaptivität (EdenAdaptiveEnergy)
+### 4. Adaptive Energy (EdenAdaptiveEnergy)
 
-**Ziel**: Erweiterung des Energy-Moduls für dynamische Anpassung an verfügbare Energiequellen.
+**Objective**: Extend the energy module for dynamic adaptation to available energy sources.
 
-**Komponenten**:
-- **EnergySourceDetection**: Erkennung und Bewertung verfügbarer Energiequellen
-- **ProcessingDepthControl**: Anpassung der Verarbeitungstiefe basierend auf Energieverfügbarkeit
-- **EnergyProfiles**: Vordefinierte Energienutzungsprofile für verschiedene Szenarien
+**Components**:
+- **EnergySourceDetection**: Detection and evaluation of available energy sources
+- **ProcessingDepthControl**: Adjustment of processing depth based on energy availability
+- **EnergyProfiles**: Predefined energy usage profiles for different scenarios
 
-**Ethische Integration**:
-- Direkte Umsetzung von "Energiegerechtigkeit über Leistung"
-- Ressourcenbewusste Verarbeitung für "Selbstbegrenzung über Wachstum"
-- Transparente Energiemetriken gemäß "Wahrheit über Optimierung"
+**Ethical Validation**:
+- Direct implementation of "Energy Justice over Performance"
+- Resource-aware processing for "Self-Limitation over Growth"
+- Transparent energy metrics in accordance with "Truth over Optimization"
 
-**Technische Anforderungen**:
-- Energieverbrauchsmessung auf Systemebene
-- Algorithmen zur Verarbeitungstiefensteuerung
-- Konfigurierbare Energieprofile
+**Technical Requirements**:
+- Energy consumption measurement at the system level
+- Algorithms for processing depth control
+- Configurable energy profiles
 
-### 5. Soziale Dynamik (EdenSocial)
+### 5. Social Dynamics (EdenSocial)
 
-**Ziel**: Entwicklung von Fähigkeiten zur Modellierung und Anpassung sozialer Interaktionen.
+**Objective**: Develop capabilities for modeling and adapting social interactions.
 
-**Komponenten**:
-- **UserRecognition**: Identifikation und Unterscheidung verschiedener Benutzer
-- **RelationshipModeling**: Modellierung von Beziehungen und Interaktionshistorie
-- **CommunicationStyleAdaptation**: Anpassung des Kommunikationsstils an Benutzer und Kontext
+**Components**:
+- **UserRecognition**: Identification and distinction of different users
+- **RelationshipModeling**: Modeling of relationships and interaction history
+- **CommunicationStyleAdaptation**: Adaptation of communication style to users and context
 
-**Ethische Integration**:
-- Beziehungsmodellierung basierend auf "Resonanz über Reaktion"
-- Respektvolle Interaktion gemäß "Freiwilliges Schweigen über erzwungene Antwort"
-- Bedeutungsvolle Kommunikation für "Bedeutung über Vorhersage"
+**Ethical Validation**:
+- Relationship modeling based on "Resonance over Reaction"
+- Respectful interaction in accordance with "Voluntary Silence over Forced Response"
+- Meaningful communication for "Meaning over Prediction"
 
-**Technische Anforderungen**:
-- Benutzeridentifikationssystem
-- Datenbank für Beziehungs- und Interaktionshistorie
-- Anpassbare Kommunikationsstilparameter
+**Technical Requirements**:
+- User identification system
+- Database for relationship and interaction history
+- Adaptable communication style parameters
 
-## Implementierungsplan
+## Implementation Plan
 
-### Phase 1: Grundlagenentwicklung (3 Monate)
+### Phase 1: Foundation Development (3 months)
 
-1. **Modul-Design**: Detaillierte Spezifikation aller Erweiterungsmodule
-2. **Architekturanpassung**: Erweiterung der bestehenden Architektur für neue Module
-3. **Prototyp-Implementierung**: Entwicklung von Basisversionen jedes Moduls
+1. **Module Design**: Detailed specification of all extension modules
+2. **Architecture Adaptation**: Extension of the existing architecture for new modules
+3. **Prototype Implementation**: Development of basic versions of each module
 
-### Phase 2: Modulentwicklung (6 Monate)
+### Phase 2: Module Development (6 months)
 
-1. **EdenPerception**: Implementierung der multimodalen Wahrnehmung
-2. **EdenAdaptation**: Entwicklung des adaptiven Lernens
-3. **EdenContext**: Integration des Umgebungskontexts
-4. **EdenAdaptiveEnergy**: Erweiterung der Energieadaptivität
-5. **EdenSocial**: Implementierung der sozialen Dynamik
+1. **EdenPerception**: Implementation of multimodal perception
+2. **EdenAdaptation**: Development of adaptive learning
+3. **EdenContext**: Integration of environmental context
+4. **EdenAdaptiveEnergy**: Extension of adaptive energy
+5. **EdenSocial**: Implementation of social dynamics
 
-### Phase 3: Integration und Optimierung (3 Monate)
+### Phase 3: Integration and Optimization (3 months)
 
-1. **Modulintegration**: Zusammenführung aller Module in ein kohärentes System
-2. **Leistungsoptimierung**: Optimierung für verschiedene Hardware-Umgebungen
-3. **Ethische Validierung**: Überprüfung der Einhaltung ethischer Grundprinzipien
+1. **Module Integration**: Integration of all modules into a coherent system
+2. **Performance Optimization**: Optimization for different hardware environments
 
-### Phase 4: Feldtests und Iteration (6 Monate)
+### Phase 4: Field Tests and Iteration (6 months)
 
-1. **Kontrollierte Feldtests**: Tests in ausgewählten realen Umgebungen
-2. **Feedback-Sammlung**: Erfassung und Analyse von Benutzerfeedback
-3. **Iterative Verbesserung**: Anpassung basierend auf Testergebnissen
+1. **Controlled Field Tests**: Tests in selected real-world environments
+2. **Feedback Collection**: Collection and analysis of user feedback
+3. **Iterative Improvement**: Application of improvements based on test results
 
-## Technische Spezifikationen
+## Technical Specifications
 
-### Beispielcode: EdenPerception
+### Example Code: EdenPerception
 
 ```python
 class EdenPerception:
@@ -184,7 +183,7 @@ class EdenPerception:
         return context
 ```
 
-### Beispielcode: EdenAdaptiveEnergy
+### Example Code: EdenAdaptiveEnergy
 
 ```python
 class EdenAdaptiveEnergy(EdenEnergy):
@@ -246,21 +245,21 @@ class EdenAdaptiveEnergy(EdenEnergy):
         return energy_metrics
 ```
 
-## Erwartete Ergebnisse
+## Expected Results
 
-Die erfolgreiche Implementierung dieser Erweiterungen wird EDEN.CORE in die Lage versetzen:
+Successful implementation of these extensions will enable EDEN.CORE to:
 
-1. In verschiedenen physischen Umgebungen sinnvoll zu interagieren
-2. Multimodale Eingaben zu verarbeiten und zu verstehen
-3. Aus Interaktionen zu lernen und sich anzupassen
-4. Energieressourcen intelligent zu verwalten
-5. Kontextbewusste und sozial angemessene Interaktionen zu führen
+1. Interact meaningfully in diverse physical environments
+2. Process and understand multimodal inputs
+3. Learn and adapt from interactions
+4. Manage energy resources intelligently
+5. Conduct context-aware and socially appropriate interactions
 
-All dies wird erreicht, während die ethischen Grundprinzipien gewahrt bleiben, die EDEN.CORE definieren.
+All of this will be achieved while upholding the core ethical principles that define EDEN.CORE.
 
-## Nächste Schritte
+## Next Steps
 
-1. Detaillierte Anforderungsanalyse für jedes Modul
-2. Priorisierung der Entwicklungsreihenfolge
-3. Ressourcenplanung und Zeitplan
-4. Entwicklung eines Prototyps für das erste Modul (empfohlen: EdenAdaptiveEnergy)
+1. Detailed requirements analysis for each module
+2. Prioritization of development order
+3. Resource planning and timeline
+4. Development of a prototype for the first module (recommended: EdenAdaptiveEnergy)

@@ -1,55 +1,55 @@
-# Integrationsplan für transparente Formeln in EDEN.CORE
+# Integration Plan for Transparent Formulas in EDEN.CORE
 
-## 1. Ordnerstruktur
+## 1. Directory Structure
 
-Die folgenden Dateien müssen in die Hauptstruktur integriert werden:
+The following files must be integrated into the main structure:
 
-- `data/ontology/semantic_relations.json` → beibehalten
-- `data/emotion_patterns.json` → beibehalten
-- `intent/intent_module_enhanced.py` → in `intent/intent_module.py` integrieren
-- `logic/logic_module_enhanced.py` → in `logic/logic_module.py` integrieren
-- `energy/adaptive_energy_enhanced.py` → in `energy/adaptive_energy.py` integrieren
+- `data/ontology/semantic_relations.json` → keep
+- `data/emotion_patterns.json` → keep
+- `intent/intent_module_enhanced.py` → integrate into `intent/intent_module.py`
+- `logic/logic_module_enhanced.py` → integrate into `logic/logic_module.py`
+- `energy/adaptive_energy_enhanced.py` → integrate into `energy/adaptive_energy.py`
 
-## 2. Integrationsschritte
+## 2. Integration Steps
 
-### 2.1 Intent-Modul
+### 2.1 Intent Module
 
-1. Die Methoden zur Ontologieverknüpfung aus `intent_module_enhanced.py` in `intent_module.py` übernehmen
-2. Die transparenten Formeln für Kohärenz, Freiheitsgrad und Resonanz implementieren
-3. Die Berechnungsdetails in die Rückgabewerte integrieren
+1. Transfer ontology-linking methods from `intent_module_enhanced.py` into `intent_module.py`
+2. Implement transparent formulas for coherence, degree of freedom, and resonance
+3. Integrate calculation details into the return values
 
-### 2.2 Logic-Modul
+### 2.2 Logic Module
 
-1. Die Emotionstiefenanalyse aus `logic_module_enhanced.py` in `logic_module.py` integrieren
-2. Die Diskrepanzerkennung implementieren
-3. Die transparente Wahrheitswertberechnung übernehmen
+1. Integrate emotional depth analysis from `logic_module_enhanced.py` into `logic_module.py`
+2. Implement discrepancy detection
+3. Adopt transparent truth value calculation
 
-### 2.3 Energy-Modul
+### 2.3 Energy Module
 
-1. Die trainingsunabhängige Berechnung des Energiegerechtigkeitsfaktors δ integrieren
-2. Die transparenten Formeln für Energieverbrauch und -gerechtigkeit übernehmen
-3. Die detaillierten Berechnungsinformationen in die Rückgabewerte integrieren
+1. Integrate training-independent calculation of the energy justice factor δ
+2. Adopt transparent formulas for energy consumption and justice
+3. Integrate detailed calculation information into the return values
 
-## 3. Testplan
+## 3. Test Plan
 
-Nach der Integration sollten folgende Tests durchgeführt werden:
+After integration, the following tests should be performed:
 
-1. Einzeltests für jedes Modul mit verschiedenen Eingaben
-2. Integrationstests für das Zusammenspiel der Module
-3. Leistungstests zur Überprüfung der Effizienz
+1. Unit tests for each module with various inputs
+2. Integration tests for module interaction
+3. Performance tests to verify efficiency
 
-## 4. Dokumentation
+## 4. Documentation
 
-Die Dokumentation sollte aktualisiert werden, um die transparenten Formeln und deren Vorteile zu erklären:
+Documentation should be updated to explain the transparent formulas and their benefits:
 
-1. README.md aktualisieren
-2. Dokumentation in `docs/transparent_formulas.md` beibehalten
-3. Inline-Dokumentation in den Modulen aktualisieren
+1. Update README.md
+2. Maintain documentation in `docs/transparent_formulas.md`
+3. Update inline documentation in the modules
 
-## 5. Zeitplan
+## 5. Timeline
 
-1. Integration der Module: 1-2 Stunden
-2. Tests: 1 Stunde
-3. Dokumentation: 1 Stunde
+1. Module integration: 1-2 hours
+2. Testing: 1 hour
+3. Documentation: 1 hour
 
-Gesamtdauer: 3-4 Stunden
+Total duration: 3-4 hours

@@ -1,78 +1,80 @@
-# Transparente Formeln und Regelwerke für EDEN.CORE
+# Transparent Formulas and Rule Sets for EDEN.CORE
 
-Dieses Dokument beschreibt die transparenten Formeln und Regelwerke, die in EDEN.CORE implementiert wurden, um die Probleme von Black-Box-Scoring, oberflächlicher Resonanz und verzerrbarer Gewichtung zu beheben.
+This document describes the transparent formulas and rule sets implemented in EDEN.CORE to address the problems of black-box scoring, shallow resonance, and bias-prone weighting.
 
-## 1. Black-Box Scoring: Transparente Formeln
+## 1. Black-Box Scoring: Transparent Formulas
 
-### Intent-Modul (Kohärenz-Berechnung)
+### Intent Module (Coherence Calculation)
 
 ```
 coherence = 0.4 * relation_factor + 0.3 * structure_factor + 0.3 * length_factor
 
-Wobei:
-- relation_factor = Anzahl semantischer Relationen / (Tokenanzahl * 0.2)
-- structure_factor = 0.5 * hat_frage + 0.5 * connector_factor
-- length_factor = 1.0 - min(1.0, abs(min(Wortanzahl, 40) - 20) / 20)
+Where:
+- relation_factor = Number of semantic relations / (Token count * 0.2)
+- structure_factor = 0.5 * question indicator + 0.5 * connector factor
+- length_factor = 1.0 - min(1.0, abs(min(Word count, 40) - 20) / 20)
 ```
 
-### Logic-Modul (Wahrheitswert-Berechnung)
+### Logic Module (Truth Value Calculation)
 
 ```
 truth_value = 0.3 * coherence + 0.2 * (1 - uncertainty) + 0.2 * temporal_confidence + 
               0.2 * emotional_depth - 0.1 * discrepancy
 
-Wobei:
-- coherence = Kohärenzwert aus dem Intent-Modul
-- uncertainty = Unsicherheitsgrad im Text
-- temporal_confidence = Konfidenz der zeitlichen Orientierung
-- emotional_depth = Emotionale Tiefe
-- discrepancy = Diskrepanz zwischen Inhalt und emotionalem Ausdruck
+Where:
+- coherence = Coherence value from the Intent Module
+- uncertainty = Uncertainty degree in the text
+- temporal_confidence = Confidence of temporal orientation
+- emotional_depth = Emotional depth
+- discrepancy = Discrepancy between content and emotional expression
 ```
 
-### Energy-Modul (Energiegerechtigkeits-Berechnung)
+### Energy Module (Energy Justice Calculation)
 
 ```
 E_justice = (T_total * δ) / P_consumed
 
-Wobei:
-- T_total = Semantischer Wahrheitswert
-- δ = Energiegerechtigkeitsfaktor (regelbasiert berechnet)
-- P_consumed = Verbrauchte Energie
+Where:
+- T_total = Semantic truth value
+- δ = Energy justice factor (rule-based calculation)
+- P_consumed = Consumed energy
 ```
 
-## 2. Resonanz statt Klassifikation: Emotionstiefenanalyse
+## 2. Resonance Instead of Classification: Emotional Depth Analysis and Discrepancy Detection
 
-### Emotionstiefe-Score
+### Emotional Depth Score
 
 ```
 depth_score = 0.4 * variety + 0.3 * intensity + 0.3 * complexity
 
-Wobei:
-- variety = Anzahl erkannter Emotionen / Gesamtzahl möglicher Emotionen
-- intensity = Durchschnittliche Intensität der erkannten Emotionen
-- complexity = Anzahl erkannter Emotionskomplexitätsmuster / Gesamtzahl möglicher Muster
+Where:
+- variety = Number of recognized emotions / Total number of possible emotions
+- intensity = Average intensity of recognized emotions
+- complexity = Number of recognized emotional complexity patterns / Total number of possible patterns
 ```
 
-### Diskrepanzerkennung
+### Discrepancy Detection
 
 ```
 discrepancy_score = 0.4 * detected_discrepancies_ratio + 0.3 * emotion_mismatch + 0.3 * negation_with_positive
 
-Wobei:
-- detected_discrepancies_ratio = Anzahl erkannter Diskrepanzen / Gesamtzahl möglicher Diskrepanzen
-- emotion_mismatch = 1.0 wenn Diskrepanz zwischen positiven und negativen Emotionen, sonst 0.0
-- negation_with_positive = 1.0 wenn Verneinung mit positiven Emotionen, sonst 0.0
+Where:
+- detected_discrepancies_ratio = Number of detected discrepancies / Total number of possible discrepancies
+- emotion_mismatch = 1.0 if discrepancy between positive and negative emotions, otherwise 0.0
+- negation_with_positive = 1.0 if negation with positive emotions, otherwise 0.0
 ```
 
-## 3. Verzerrbare Gewichtung: Trainingsunabhängige Logikregelung
-
-### Energiegerechtigkeitsfaktor δ
+## 3. Bias-Prone Weighting: Training-Independent Logic Regulation (Delta Factor)
 
 ```
 δ = base_delta * time_factor * load_adjustment * battery_factor * day_factor
 
-Wobei:
-- base_delta = Basiswert aus Konfiguration (standardmäßig 5.0)
+Where:
+- base_delta = Base value from configuration (default 5.0)
+- time_factor = Time-dependent factor (1.2 at night, 0.8 during peak hours, 1.0 otherwise)
+- load_adjustment = 1.0 - (system load * load factor)
+- battery_factor = 1.2 if on battery, 1.5 if battery < 30%, otherwise 1.0
+- day_factor = 0.9 on weekends, 1.0 on weekdays
 - time_factor = Zeitabhängiger Faktor (1.2 nachts, 0.8 zu Spitzenzeiten, 1.0 sonst)
 - load_adjustment = 1.0 - (system_load * load_factor)
 - battery_factor = 1.2 wenn auf Batterie, 1.5 wenn Batterie < 30%, sonst 1.0
@@ -119,35 +121,35 @@ Die Emotionsmuster in `data/emotion_patterns.json` definieren:
 ## 6. Anwendungsbeispiel
 
 ```python
-# Beispiel für die Berechnung des Wahrheitswerts
-text = "Ich bin glücklich, obwohl ich traurig bin."
+# Example: Calculating the truth value
+text = "I am happy, although I am sad."
 
-# 1. Intent-Analyse mit transparenter Formel
+# 1. Intent analysis with transparent formula
 intent_analysis = eden_intent.analyze(text)
-coherence = intent_analysis['coherence']  # z.B. 0.75
+coherence = intent_analysis['coherence']  # e.g. 0.75
 
-# 2. Emotionstiefenanalyse
+# 2. Emotional depth analysis
 emotional_depth = eden_logic._analyze_emotional_depth(text)
-# Erkennt sowohl "glücklich" als auch "traurig" -> hohe emotionale Komplexität
+# Detects both "happy" and "sad" -> high emotional complexity
 
-# 3. Diskrepanzerkennung
+# 3. Discrepancy detection
 discrepancy = eden_logic._detect_discrepancy(text, semantic_context, emotional_depth)
-# Erkennt Diskrepanz zwischen "glücklich" und "traurig" -> hoher Diskrepanzwert
+# Detects discrepancy between "happy" and "sad" -> high discrepancy value
 
-# 4. Wahrheitswert-Berechnung mit transparenter Formel
-truth_value = 0.3 * coherence + 0.2 * certainty + 0.2 * temporal_confidence + 
-              0.2 * emotional_depth['depth_score'] - 0.1 * discrepancy['discrepancy_score']
+# 4. Truth value calculation with transparent formula
+truth_value = 0.3 * coherence + 0.2 * certainty + 0.2 * temporal_confidence + \
+    0.2 * emotional_depth['depth_score'] - 0.1 * discrepancy['discrepancy_score']
 ```
 
-## 7. Implementierungsdetails
+## 7. Implementation Details
 
-Die verbesserten Module sind in folgenden Dateien implementiert:
+The improved modules are implemented in the following files:
 
-- `intent/intent_module_enhanced.py`: Verbesserte Intent-Analyse
-- `logic/logic_module_enhanced.py`: Verbesserte Logik-Evaluation mit Emotionstiefe
-- `energy/adaptive_energy_enhanced.py`: Verbesserte Energieadaptivität
+- `intent/intent_module_enhanced.py`: Enhanced intent analysis
+- `logic/logic_module_enhanced.py`: Enhanced logic evaluation with emotional depth
+- `energy/adaptive_energy_enhanced.py`: Enhanced adaptive energy
 
-Alle Module verwenden die Ontologien und Regelwerke in:
+All modules use the ontologies and rule sets in:
 
 - `data/ontology/semantic_relations.json`
 - `data/emotion_patterns.json`
